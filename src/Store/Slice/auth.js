@@ -2,13 +2,14 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
 	isLoggingIn: false,
-	isLoggingOut: false,
-	isVerifying: false,
-	isRegistering: false,
-	isResetting: false,
 	loginError: false,
+	isLoggingOut: false,
 	logoutError: false,
+	isVerifying: false,
+	verifyError: false,
+	isRegistering: false,
 	registerError: false,
+	isResetting: false,
 	resetError: false,
 	isAuthenticated: false,
 	user: null,
@@ -31,9 +32,14 @@ const authSlice = createSlice({
 		},
 		requestVerify(state, action) {
 			state.isVerifying = true
+			state.verifyError = false
 		},
 		receiveVerify(state, action) {
 			state.isVerifying = false
+		},
+		verifyError(state, action) {
+			state.isVerifying = false
+			state.verifyError = action.payload
 		},
 		requestLogin(state, action) {
 			state.isLoggingIn = true
@@ -44,14 +50,14 @@ const authSlice = createSlice({
 			state.isAuthenticated = true
 			state.user = action.payload
 		},
+		loginError(state, action) {
+			state.isLoggingIn = false
+			state.loginError = action.payload
+		},
 		receiveLocalAuth(state, action) {
 			state.isLoggingIn = false
 			state.isAuthenticated = true
 			state.user = action.payload
-		},
-		loginError(state, action) {
-			state.isLoggingIn = false
-			state.loginError = action.payload
 		},
 		requestLogout(state, action) {
 			state.isLoggingOut = true
@@ -86,10 +92,11 @@ export const {
 	registerError,
 	requestVerify,
 	receiveVerify,
+	verifyError,
 	requestLogin,
 	receiveLogin,
-	receiveLocalAuth,
 	loginError,
+	receiveLocalAuth,
 	requestLogout,
 	receiveLogout,
 	logoutError,

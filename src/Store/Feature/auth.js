@@ -6,6 +6,7 @@ import {
 	registerError,
 	requestVerify,
 	receiveVerify,
+	verifyError,
 	requestLogin,
 	receiveLogin,
 	loginError,
@@ -20,26 +21,26 @@ import {
 
 import { createUser, fetchUser, clearUser } from 'Store/Feature/user'
 
-export const registerUser = (email, password) => dispatch => {
+export const registerUser = (email, password) => (dispatch) => {
 	dispatch(requestRegister())
 
 	myFirebase
 		.auth()
 		.createUserWithEmailAndPassword(email, password)
-		.then(response => {
+		.then((response) => {
 			dispatch(receiveRegister())
 			return response
 		})
-		.then(userObj => {
+		.then((userObj) => {
 			dispatch(createUser(userObj.user.uid, userObj.user.email))
 		})
-		.catch(error => {
+		.catch((error) => {
 			console.log(error)
 			dispatch(registerError(error.message))
 		})
 }
 
-export const verifyAuth = () => dispatch => {
+export const verifyAuth = () => (dispatch) => {
 	dispatch(requestVerify())
 
 	const localUser = JSON.parse(localStorage.getItem('authUser'))
@@ -47,35 +48,41 @@ export const verifyAuth = () => dispatch => {
 		dispatch(receiveLocalAuth(localUser))
 	}
 
-	myFirebase.auth().onAuthStateChanged(user => {
-		if (user !== null) {
-			dispatch(receiveLogin(user))
-			localStorage.setItem('authUser', JSON.stringify(user))
-			dispatch(fetchUser(user.uid))
-		} else {
-			dispatch(receiveLogout())
-			localStorage.removeItem('authUser')
-			dispatch(clearUser())
-		}
-		dispatch(receiveVerify())
-	})
+	myFirebase
+		.auth()
+		.onAuthStateChanged((user) => {
+			if (user !== null) {
+				dispatch(receiveLogin(user))
+				localStorage.setItem('authUser', JSON.stringify(user))
+				dispatch(fetchUser(user.uid))
+			} else {
+				dispatch(receiveLogout())
+				localStorage.removeItem('authUser')
+				dispatch(clearUser())
+			}
+			dispatch(receiveVerify())
+		})
+		.catch((error) => {
+			console.log(error)
+			dispatch(verifyError(error.message))
+		})
 }
 
-export const loginUser = (email, password) => dispatch => {
+export const loginUser = (email, password) => (dispatch) => {
 	dispatch(requestLogin())
 	myFirebase
 		.auth()
 		.signInWithEmailAndPassword(email, password)
-		.then(userObj => {
+		.then((userObj) => {
 			dispatch(receiveLogin(userObj.user))
 		})
-		.catch(error => {
+		.catch((error) => {
 			console.log(error)
 			dispatch(loginError(error.message))
 		})
 }
 
-export const logoutUser = () => dispatch => {
+export const logoutUser = () => (dispatch) => {
 	dispatch(requestLogout())
 
 	myFirebase
@@ -84,13 +91,13 @@ export const logoutUser = () => dispatch => {
 		.then(() => {
 			dispatch(receiveLogout())
 		})
-		.catch(error => {
+		.catch((error) => {
 			console.log(error)
 			dispatch(logoutError(error.message))
 		})
 }
 
-export const resetPassword = email => dispatch => {
+export const resetPassword = (email) => (dispatch) => {
 	dispatch(requestReset())
 
 	myFirebase
@@ -99,7 +106,7 @@ export const resetPassword = email => dispatch => {
 		.then(() => {
 			dispatch(receiveReset())
 		})
-		.catch(error => {
+		.catch((error) => {
 			console.log(error)
 			dispatch(resetError(error.message))
 		})

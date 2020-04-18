@@ -2,10 +2,10 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
 	isCreating: false,
-	isLoading: false,
-	isClearing: false,
 	createUserError: false,
+	isLoading: false,
 	loadUserError: false,
+	isClearing: false,
 	clearUserError: false,
 	details: null,
 }

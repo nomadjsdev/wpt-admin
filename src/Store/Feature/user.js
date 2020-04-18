@@ -9,10 +9,10 @@ import {
 	loadUserError,
 	requestClearUser,
 	receiveClearUser,
-	// clearUserError,
+	clearUserError,
 } from 'Store/Slice/user'
 
-export const createUser = (uid, email) => dispatch => {
+export const createUser = (uid, email) => (dispatch) => {
 	dispatch(requestNewUser())
 
 	const initialUserState = { email }
@@ -24,13 +24,13 @@ export const createUser = (uid, email) => dispatch => {
 		.then(() => {
 			dispatch(receiveNewUser({ email }))
 		})
-		.catch(error => {
+		.catch((error) => {
 			console.log(error)
 			dispatch(newUserError(error.message))
 		})
 }
 
-export const fetchUser = uid => dispatch => {
+export const fetchUser = (uid) => (dispatch) => {
 	// TODO: Fetch from localstorage for faster load
 	// then fetch from database (if last fetch was > certain time?,) and update localstorage
 	dispatch(requestLoadUser())
@@ -39,21 +39,16 @@ export const fetchUser = uid => dispatch => {
 		.database()
 		.ref(`user/${uid}`)
 		.once('value')
-		.then(snapshot => {
+		.then((snapshot) => {
 			dispatch(receiveLoadUser(snapshot.val()))
-			return snapshot.val()
 		})
-		.then(value => {
-			// Do clan / group fetching here?
-			console.log(value)
-		})
-		.catch(error => {
+		.catch((error) => {
 			console.log(error)
 			dispatch(loadUserError(error.message))
 		})
 }
 
-export const clearUser = () => dispatch => {
+export const clearUser = () => (dispatch) => {
 	dispatch(requestClearUser())
 	// Check if user object cleared
 	// if success

@@ -10,8 +10,8 @@ import Login from 'View/Login'
 import Navbar from 'Component/Navbar'
 
 const App = () => {
-	const { isLoggingIn, isLoggingOut, isVerifying, isAuthenticated } = useSelector(state => state.auth)
-	const { isCreating, isLoading } = useSelector(state => state.user)
+	const { isLoggingIn, isLoggingOut, isVerifying, isAuthenticated } = useSelector((state) => state.auth)
+	const { isCreating, isLoading } = useSelector((state) => state.user)
 
 	if (isLoggingIn) {
 		return (

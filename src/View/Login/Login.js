@@ -7,14 +7,14 @@ import { loginUser } from 'Store/Feature/auth'
 
 const Login = () => {
 	const dispatch = useDispatch()
-	const loginError = useSelector(state => state.auth.loginError)
+	const loginError = useSelector((state) => state.auth.loginError)
 
 	return (
 		<React.Fragment>
 			<h1>Login</h1>
 			<Formik
 				initialValues={{ email: '', password: '' }}
-				validate={values => {
+				validate={(values) => {
 					const errors = {}
 					if (!values.email) {
 						errors.email = 'Required'
@@ -26,7 +26,7 @@ const Login = () => {
 					}
 					return errors
 				}}
-				onSubmit={values => {
+				onSubmit={(values) => {
 					dispatch(loginUser(values.email, values.password))
 				}}
 			>

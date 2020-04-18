@@ -7,14 +7,14 @@ import { resetPassword } from 'Store/Feature/auth'
 
 const PasswordReset = () => {
 	const dispatch = useDispatch()
-	const resetError = useSelector(state => state.auth.resetError)
+	const resetError = useSelector((state) => state.auth.resetError)
 
 	return (
 		<React.Fragment>
 			<h1>PasswordReset</h1>
 			<Formik
 				initialValues={{ email: '' }}
-				validate={values => {
+				validate={(values) => {
 					const errors = {}
 					if (!values.email) {
 						errors.email = 'Required'
@@ -23,7 +23,7 @@ const PasswordReset = () => {
 					}
 					return errors
 				}}
-				onSubmit={values => {
+				onSubmit={(values) => {
 					dispatch(resetPassword(values.email))
 				}}
 			>

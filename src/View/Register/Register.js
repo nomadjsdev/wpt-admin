@@ -7,14 +7,14 @@ import { registerUser } from 'Store/Feature/auth'
 
 const Register = () => {
 	const dispatch = useDispatch()
-	const registerError = useSelector(state => state.auth.registerError)
+	const registerError = useSelector((state) => state.auth.registerError)
 
 	return (
 		<React.Fragment>
 			<h1>Register</h1>
 			<Formik
 				initialValues={{ email: '', password1: '', password2: '' }}
-				validate={values => {
+				validate={(values) => {
 					const errors = {}
 					if (!values.email) {
 						errors.email = 'Required'
@@ -32,7 +32,7 @@ const Register = () => {
 					}
 					return errors
 				}}
-				onSubmit={values => {
+				onSubmit={(values) => {
 					dispatch(registerUser(values.email, values.password1))
 				}}
 			>

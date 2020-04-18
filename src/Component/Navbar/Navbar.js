@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logoutUser } from 'Store/Feature/auth'
 
 const Navbar = () => {
-	const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
+	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
 
 	return (
 		<React.Fragment>
@@ -22,7 +22,7 @@ const NavbarDefault = () => (
 
 const NavbarAuth = () => {
 	const dispatch = useDispatch()
-	const details = useSelector(state => state.user.details)
+	const details = useSelector((state) => state.user.details)
 
 	return (
 		<React.Fragment>
