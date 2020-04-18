@@ -1,10 +1,5 @@
 # Change log
 
-## [1.1.0] - 2020-01-14
+## [0.1.0] - 2020-04-18
 
-- Change from Firestore to Realtime Database
-- Rename to `cra-rtk`
-
-## [1.0.0] - 2020-01-02
-
-- Initial release
+- Initial commit

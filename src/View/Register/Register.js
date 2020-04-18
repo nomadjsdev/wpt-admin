@@ -10,7 +10,7 @@ const Register = () => {
 	const registerError = useSelector(state => state.auth.registerError)
 
 	return (
-		<>
+		<React.Fragment>
 			<h1>Register</h1>
 			<Formik
 				initialValues={{ email: '', password1: '', password2: '' }}
@@ -55,9 +55,9 @@ const Register = () => {
 			</Formik>
 			<div>
 				{registerError && (
-					<>
+					<React.Fragment>
 						<p>{registerError}</p>
-					</>
+					</React.Fragment>
 				)}
 			</div>
 			<p>
@@ -66,7 +66,7 @@ const Register = () => {
 			<p>
 				Forgot your password? <Link to="/passwordreset">Reset it here.</Link>
 			</p>
-		</>
+		</React.Fragment>
 	)
 }
 

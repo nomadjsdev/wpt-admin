@@ -1,10 +1,5 @@
-# CRA / Redux Toolkit / Firebase Auth template
+# Web Page Test Admin
 
-A **highly opinionated** template for React apps requiring Firebase Auth based login
+_Bootstrapped from [CRA-RTK](https://github.com/nomadjsdev/cra-rtk)_
 
-- Create React App structure
-- Redux Toolkit
-- Firebase Auth + Realtime Database
-- Formik
-- ESLint (AirBnB)
-- Prettier
+A SAAS dashboard to handle submitting pages to the public [Web Page Test servers](https://www.webpagetest.org/) and [Pagespeed Insights](https://developers.google.com/speed/pagespeed/insights/)

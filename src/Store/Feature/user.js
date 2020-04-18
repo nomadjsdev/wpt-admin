@@ -15,6 +15,8 @@ import {
 export const createUser = (uid, email) => dispatch => {
 	dispatch(requestNewUser())
 
+	const initialUserState = { email }
+
 	myFirebase
 		.database()
 		.ref(`user/${uid}`)

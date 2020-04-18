@@ -8,16 +8,16 @@ const Navbar = () => {
 	const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
 
 	return (
-		<>
+		<React.Fragment>
 			<NavLink to="/">Home</NavLink> | {isAuthenticated ? <NavbarAuth /> : <NavbarDefault />}
-		</>
+		</React.Fragment>
 	)
 }
 
 const NavbarDefault = () => (
-	<>
+	<React.Fragment>
 		<NavLink to="/register">Register</NavLink> | <NavLink to="/login">Login</NavLink>
-	</>
+	</React.Fragment>
 )
 
 const NavbarAuth = () => {
@@ -25,7 +25,7 @@ const NavbarAuth = () => {
 	const details = useSelector(state => state.user.details)
 
 	return (
-		<>
+		<React.Fragment>
 			<button
 				type="button"
 				onClick={() => {
@@ -35,7 +35,7 @@ const NavbarAuth = () => {
 				Logout
 			</button>
 			<span>{details.email}</span>
-		</>
+		</React.Fragment>
 	)
 }
 

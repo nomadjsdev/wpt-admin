@@ -15,37 +15,37 @@ const App = () => {
 
 	if (isLoggingIn) {
 		return (
-			<>
+			<React.Fragment>
 				<h1>Logging in</h1>
-			</>
+			</React.Fragment>
 		)
 	}
 	if (isLoggingOut) {
 		return (
-			<>
+			<React.Fragment>
 				<h1>Logging out</h1>
-			</>
+			</React.Fragment>
 		)
 	}
 	if (isVerifying) {
 		return (
-			<>
+			<React.Fragment>
 				<h1>Verifying</h1>
-			</>
+			</React.Fragment>
 		)
 	}
 	if (isCreating) {
 		return (
-			<>
+			<React.Fragment>
 				<h1>Creating user</h1>
-			</>
+			</React.Fragment>
 		)
 	}
 	if (isLoading) {
 		return (
-			<>
+			<React.Fragment>
 				<h1>Loading</h1>
-			</>
+			</React.Fragment>
 		)
 	}
 
