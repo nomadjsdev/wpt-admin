@@ -9,7 +9,7 @@ import {
 	loadUserError,
 	requestClearUser,
 	receiveClearUser,
-	clearUserError,
+	// clearUserError,
 } from 'Store/Slice/user'
 
 export const createUser = (uid, email) => (dispatch) => {

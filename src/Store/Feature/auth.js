@@ -6,7 +6,7 @@ import {
 	registerError,
 	requestVerify,
 	receiveVerify,
-	verifyError,
+	// verifyError,
 	requestLogin,
 	receiveLogin,
 	loginError,
@@ -48,24 +48,18 @@ export const verifyAuth = () => (dispatch) => {
 		dispatch(receiveLocalAuth(localUser))
 	}
 
-	myFirebase
-		.auth()
-		.onAuthStateChanged((user) => {
-			if (user !== null) {
-				dispatch(receiveLogin(user))
-				localStorage.setItem('authUser', JSON.stringify(user))
-				dispatch(fetchUser(user.uid))
-			} else {
-				dispatch(receiveLogout())
-				localStorage.removeItem('authUser')
-				dispatch(clearUser())
-			}
-			dispatch(receiveVerify())
-		})
-		.catch((error) => {
-			console.log(error)
-			dispatch(verifyError(error.message))
-		})
+	myFirebase.auth().onAuthStateChanged((user) => {
+		if (user !== null) {
+			dispatch(receiveLogin(user))
+			localStorage.setItem('authUser', JSON.stringify(user))
+			dispatch(fetchUser(user.uid))
+		} else {
+			dispatch(receiveLogout())
+			localStorage.removeItem('authUser')
+			dispatch(clearUser())
+		}
+		dispatch(receiveVerify())
+	})
 }
 
 export const loginUser = (email, password) => (dispatch) => {
